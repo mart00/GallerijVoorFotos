@@ -14,16 +14,27 @@
 
 Route::get('/', 'AlbumsController@index');
 Route::get('/albums', 'AlbumsController@index');
-Route::get('/albums/create', 'AlbumsController@create');
+Route::get('/albums/create', 'AlbumsController@create')->middleware('auth');
 Route::post('/albums/store', 'AlbumsController@store');
 Route::get('/albums/{id}', 'AlbumsController@show');
-Route::get('/albums/{id}/edit', 'AlbumsController@edit');
-Route::patch('/albums/{id}', 'AlbumsController@update');
-Route::delete('/albums/{id}', 'AlbumsController@destroy');
+Route::get('/albums/{id}/edit', 'AlbumsController@edit')->middleware('auth');
+Route::patch('/albums/{id}', 'AlbumsController@update')->middleware('auth');
+Route::delete('/albums/{id}', 'AlbumsController@destroy')->middleware('auth');
 
 
-Route::get('/photos/create/{id}', 'photosController@create');
-Route::post('/photos/store', 'photosController@store');
+Route::get('/photos/create/{id}', 'photosController@create')->middleware('auth');
+Route::post('/photos/store', 'photosController@store')->middleware('auth');
 Route::get('/photos/{id}', 'photosController@show');
-Route::delete('/photos/{id}', 'photosController@destroy');
-?>
+Route::delete('/photos/{id}', 'photosController@destroy')->middleware('auth');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
